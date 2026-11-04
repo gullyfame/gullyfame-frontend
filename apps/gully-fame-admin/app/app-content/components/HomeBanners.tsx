@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Image, Plus, X, Edit2, Trash2, Loader2 } from 'lucide-react';
+import { Image as ImageIcon, Plus, X, Edit2, Trash2, Loader2 } from 'lucide-react';
 import type { Banner } from '@/lib/bannerApi';
 import {
   createBanner,
@@ -189,7 +189,7 @@ export default function HomeBanners() {
     <div className="p-6 space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <Image className="h-5 w-5 text-primary-600" />
+          <ImageIcon className="h-5 w-5 text-primary-600" />
           <h2 className="text-lg font-semibold text-gray-900">Home Banners</h2>
         </div>
         <button
@@ -214,7 +214,7 @@ export default function HomeBanners() {
         </div>
       ) : banners.length === 0 ? (
         <div className="rounded-lg border border-gray-200 bg-gray-50 px-6 py-12 text-center">
-          <Image className="h-12 w-12 mx-auto text-gray-400 mb-3" />
+          <ImageIcon className="h-12 w-12 mx-auto text-gray-400 mb-3" />
           <p className="text-sm text-gray-600">No banners found.</p>
           <p className="text-xs text-gray-500 mt-1">Click "Add Banner" to create your first banner.</p>
         </div>
@@ -238,8 +238,7 @@ export default function HomeBanners() {
                     alt={banner.title}
                     className="w-full h-full object-cover"
                     onError={(e) => {
-                      (e.target as HTMLImageElement).src =
-                        'https://via.placeholder.com/800x200?text=Banner+Image';
+                      (e.target as HTMLImageElement).style.display = 'none';
                     }}
                   />
                 )}
@@ -356,6 +355,7 @@ export default function HomeBanners() {
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
               <h3 className="text-lg font-semibold text-gray-900">Add New Banner</h3>
               <button
+                aria-label="Cancel adding banner"
                 onClick={cancelAdd}
                 disabled={isAdding}
                 className="text-gray-400 hover:text-gray-600 transition-colors disabled:opacity-60"
@@ -392,6 +392,7 @@ export default function HomeBanners() {
                         className="w-full h-40 object-cover"
                       />
                       <button
+                        aria-label="Remove selected image"
                         onClick={() =>
                           handleFileSelect(null, setNewBannerFile, setNewBannerPreview)
                         }
@@ -404,7 +405,7 @@ export default function HomeBanners() {
                   ) : (
                     <label className="block cursor-pointer">
                       <div className="rounded-lg border-2 border-dashed border-gray-300 p-8 text-center hover:border-primary-400 hover:bg-primary-50/50 transition-all">
-                        <Image className="h-10 w-10 mx-auto text-gray-400 mb-2" />
+                        <ImageIcon className="h-10 w-10 mx-auto text-gray-400 mb-2" />
                         <p className="text-sm font-medium text-gray-700 mb-1">
                           Click to upload banner image
                         </p>

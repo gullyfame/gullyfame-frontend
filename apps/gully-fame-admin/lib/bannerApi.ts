@@ -37,11 +37,6 @@ export async function createBanner(
 
   const endpoint = `${BASE_URL}admin/banners`;
   
-  console.log('[Banners API] POST Create Banner - Endpoint:', endpoint);
-  console.log('[Banners API] POST Create Banner - Title:', title);
-  console.log('[Banners API] POST Create Banner - Banner file name:', bannerFile.name);
-  console.log('[Banners API] POST Create Banner - Banner file size:', bannerFile.size, 'bytes');
-  console.log('[Banners API] POST Create Banner - Banner file type:', bannerFile.type);
 
   const formData = new FormData();
   formData.append('title', title.trim());
@@ -55,13 +50,10 @@ export async function createBanner(
     });
 
     const responseText = await httpResponse.text();
-    console.log('[Banners API] POST Create Banner - Response received:', responseText);
-    console.log('[Banners API] POST Create Banner - Status:', httpResponse.status, httpResponse.statusText);
 
     let responseData: any;
     try {
       responseData = responseText ? JSON.parse(responseText) : {};
-      console.log('[Banners API] POST Create Banner - Parsed JSON:', responseData);
     } catch (parseError) {
       console.error('[Banners API] POST Create Banner - Parse error:', parseError);
 
@@ -105,7 +97,6 @@ export async function createBanner(
       ...payload,
     };
 
-    console.log('[Banners API] POST Create Banner - Success:', banner);
 
     return {
       success: true,
@@ -129,8 +120,6 @@ export async function getBanners(
 ): Promise<ApiResponse<{ items: Banner[]; total?: number; page?: number; limit?: number }>> {
   const endpoint = `${BASE_URL}admin/banners?page=${page}&limit=${limit}`;
 
-  console.log('[Banners API] GET Banners - Endpoint:', endpoint);
-  console.log('[Banners API] GET Banners - Page:', page, 'Limit:', limit);
 
   try {
     const httpResponse = await fetch(endpoint, {
@@ -141,13 +130,10 @@ export async function getBanners(
     });
 
     const responseText = await httpResponse.text();
-    console.log('[Banners API] GET Banners - Response received:', responseText);
-    console.log('[Banners API] GET Banners - Status:', httpResponse.status, httpResponse.statusText);
 
     let responseData: any;
     try {
       responseData = responseText ? JSON.parse(responseText) : {};
-      console.log('[Banners API] GET Banners - Parsed JSON:', responseData);
     } catch (parseError) {
       console.error('[Banners API] GET Banners - Parse error:', parseError);
 
@@ -210,8 +196,6 @@ export async function getBanners(
       limit: payload.limit || limit,
     };
 
-    console.log('[Banners API] GET Banners - Success:', result);
-    console.log('[Banners API] GET Banners - Total items:', items.length);
 
     return {
       success: true,
@@ -242,8 +226,6 @@ export async function getBanner(id: string): Promise<ApiResponse<Banner>> {
   const safeId = encodeURIComponent(id.toString());
   const endpoint = `${BASE_URL}admin/banners/${safeId}`;
 
-  console.log('[Banners API] GET Banner - Endpoint:', endpoint);
-  console.log('[Banners API] GET Banner - Banner ID:', id);
 
   try {
     const httpResponse = await fetch(endpoint, {
@@ -254,13 +236,10 @@ export async function getBanner(id: string): Promise<ApiResponse<Banner>> {
     });
 
     const responseText = await httpResponse.text();
-    console.log('[Banners API] GET Banner - Response received:', responseText);
-    console.log('[Banners API] GET Banner - Status:', httpResponse.status, httpResponse.statusText);
 
     let responseData: any;
     try {
       responseData = responseText ? JSON.parse(responseText) : {};
-      console.log('[Banners API] GET Banner - Parsed JSON:', responseData);
     } catch (parseError) {
       console.error('[Banners API] GET Banner - Parse error:', parseError);
 
@@ -303,7 +282,6 @@ export async function getBanner(id: string): Promise<ApiResponse<Banner>> {
       ...payload,
     };
 
-    console.log('[Banners API] GET Banner - Success:', banner);
 
     return {
       success: true,
@@ -338,14 +316,7 @@ export async function updateBanner(
   const safeId = encodeURIComponent(id.toString());
   const endpoint = `${BASE_URL}admin/banners/${safeId}`;
   
-  console.log('[Banners API] PUT Update Banner - Endpoint:', endpoint);
-  console.log('[Banners API] PUT Update Banner - Banner ID:', id);
-  console.log('[Banners API] PUT Update Banner - Title:', title || 'Not provided');
-  console.log('[Banners API] PUT Update Banner - Has banner file:', !!bannerFile);
   if (bannerFile) {
-    console.log('[Banners API] PUT Update Banner - Banner file name:', bannerFile.name);
-    console.log('[Banners API] PUT Update Banner - Banner file size:', bannerFile.size, 'bytes');
-    console.log('[Banners API] PUT Update Banner - Banner file type:', bannerFile.type);
   }
 
   const formData = new FormData();
@@ -366,13 +337,10 @@ export async function updateBanner(
     });
 
     const responseText = await httpResponse.text();
-    console.log('[Banners API] PUT Update Banner - Response received:', responseText);
-    console.log('[Banners API] PUT Update Banner - Status:', httpResponse.status, httpResponse.statusText);
 
     let responseData: any;
     try {
       responseData = responseText ? JSON.parse(responseText) : {};
-      console.log('[Banners API] PUT Update Banner - Parsed JSON:', responseData);
     } catch (parseError) {
       console.error('[Banners API] PUT Update Banner - Parse error:', parseError);
 
@@ -416,7 +384,6 @@ export async function updateBanner(
       ...payload,
     };
 
-    console.log('[Banners API] PUT Update Banner - Success:', banner);
 
     return {
       success: true,
@@ -448,8 +415,6 @@ export async function deleteBanner(id: string): Promise<ApiResponse<null>> {
   const safeId = encodeURIComponent(id.toString());
   const endpoint = `${BASE_URL}admin/banners/${safeId}`;
 
-  console.log('[Banners API] DELETE Banner - Endpoint:', endpoint);
-  console.log('[Banners API] DELETE Banner - Banner ID:', id);
 
   try {
     const httpResponse = await fetch(endpoint, {
@@ -460,13 +425,10 @@ export async function deleteBanner(id: string): Promise<ApiResponse<null>> {
     });
 
     const responseText = await httpResponse.text();
-    console.log('[Banners API] DELETE Banner - Response received:', responseText);
-    console.log('[Banners API] DELETE Banner - Status:', httpResponse.status, httpResponse.statusText);
 
     let responseData: any;
     try {
       responseData = responseText ? JSON.parse(responseText) : {};
-      console.log('[Banners API] DELETE Banner - Parsed JSON:', responseData);
     } catch (parseError) {
       console.error('[Banners API] DELETE Banner - Parse error:', parseError);
 
@@ -480,7 +442,6 @@ export async function deleteBanner(id: string): Promise<ApiResponse<null>> {
         };
       }
 
-      console.log('[Banners API] DELETE Banner - Success (non-JSON response)');
       return {
         success: true,
         message: 'Banner deleted successfully',
@@ -501,7 +462,6 @@ export async function deleteBanner(id: string): Promise<ApiResponse<null>> {
       };
     }
 
-    console.log('[Banners API] DELETE Banner - Success');
 
     return {
       success: true,

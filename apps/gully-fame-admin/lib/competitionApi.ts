@@ -21,7 +21,7 @@ export interface Competition {
   categoryId?: string;
   winnerSlots?: number;
   bannerImage?: string;
-  sponsorId?: string;
+  sponsorId?: string | { _id?: string; [key: string]: any };
   sponsorName?: string;
   sponsorLogo?: string;
   participants?: number;

@@ -15,13 +15,7 @@ export async function createCategory(
 ): Promise<ApiResponse<Category>> {
   const endpoint = `${BASE_URL}admin/categories`;
 
-  console.log('[Categories API] POST Create Category - Endpoint:', endpoint);
-  console.log('[Categories API] POST Create Category - Name:', name);
-  console.log('[Categories API] POST Create Category - Has icon file:', !!iconFile);
   if (iconFile) {
-    console.log('[Categories API] POST Create Category - Icon file name:', iconFile.name);
-    console.log('[Categories API] POST Create Category - Icon file size:', iconFile.size, 'bytes');
-    console.log('[Categories API] POST Create Category - Icon file type:', iconFile.type);
   }
 
   try {
@@ -38,13 +32,10 @@ export async function createCategory(
     });
 
     const responseText = await httpResponse.text();
-    console.log('[Categories API] POST Create Category - Response received:', responseText);
-    console.log('[Categories API] POST Create Category - Status:', httpResponse.status, httpResponse.statusText);
 
     let responseData: any;
     try {
       responseData = responseText ? JSON.parse(responseText) : {};
-      console.log('[Categories API] POST Create Category - Parsed JSON:', responseData);
     } catch (parseError) {
       console.error('[Categories API] POST Create Category - Parse error:', parseError);
 
@@ -91,7 +82,6 @@ export async function createCategory(
       ...rawCategory,
     };
 
-    console.log('[Categories API] POST Create Category - Success:', category);
 
     return {
       success: true,
@@ -115,8 +105,6 @@ export async function getCategories(
 ): Promise<ApiResponse<{ items: Category[]; total?: number; page?: number; limit?: number }>> {
   const endpoint = `${BASE_URL}admin/categories?page=${page}&limit=${limit}`;
 
-  console.log('[Categories API] GET Categories - Endpoint:', endpoint);
-  console.log('[Categories API] GET Categories - Page:', page, 'Limit:', limit);
 
   try {
     const httpResponse = await fetch(endpoint, {
@@ -127,13 +115,10 @@ export async function getCategories(
     });
 
     const responseText = await httpResponse.text();
-    console.log('[Categories API] GET Categories - Response received:', responseText);
-    console.log('[Categories API] GET Categories - Status:', httpResponse.status, httpResponse.statusText);
 
     let responseData: any;
     try {
       responseData = responseText ? JSON.parse(responseText) : {};
-      console.log('[Categories API] GET Categories - Parsed JSON:', responseData);
     } catch (parseError) {
       console.error('[Categories API] GET Categories - Parse error:', parseError);
 
@@ -197,8 +182,6 @@ export async function getCategories(
       limit: payload.limit,
     };
 
-    console.log('[Categories API] GET Categories - Success:', result);
-    console.log('[Categories API] GET Categories - Total items:', items.length);
 
     return {
       success: true,
@@ -230,8 +213,6 @@ export async function deleteCategory(id: string): Promise<ApiResponse<null>> {
   const safeId = encodeURIComponent(id.toString());
   const endpoint = `${BASE_URL}admin/categories/${safeId}`;
 
-  console.log('[Categories API] DELETE Category - Endpoint:', endpoint);
-  console.log('[Categories API] DELETE Category - Category ID:', id);
 
   try {
     const httpResponse = await fetch(endpoint, {
@@ -242,13 +223,10 @@ export async function deleteCategory(id: string): Promise<ApiResponse<null>> {
     });
 
     const responseText = await httpResponse.text();
-    console.log('[Categories API] DELETE Category - Response received:', responseText);
-    console.log('[Categories API] DELETE Category - Status:', httpResponse.status, httpResponse.statusText);
 
     let responseData: any;
     try {
       responseData = responseText ? JSON.parse(responseText) : {};
-      console.log('[Categories API] DELETE Category - Parsed JSON:', responseData);
     } catch (parseError) {
       console.error('[Categories API] DELETE Category - Parse error:', parseError);
 
@@ -263,7 +241,6 @@ export async function deleteCategory(id: string): Promise<ApiResponse<null>> {
         };
       }
 
-      console.log('[Categories API] DELETE Category - Success (non-JSON response)');
       return {
         success: true,
         message: 'Category deleted successfully',
@@ -284,7 +261,6 @@ export async function deleteCategory(id: string): Promise<ApiResponse<null>> {
       };
     }
 
-    console.log('[Categories API] DELETE Category - Success');
 
     return {
       success: true,

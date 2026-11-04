@@ -333,6 +333,7 @@ export default function TipsPage() {
               <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 sticky top-0 bg-white">
                 <h2 className="text-xl font-bold text-gray-900">User Details</h2>
                 <button
+                  aria-label="Close user details"
                   onClick={() => {
                     setShowUserDetailsModal(false);
                     setSelectedUser(null);

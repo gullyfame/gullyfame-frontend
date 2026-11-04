@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import DashboardLayout from '@/components/DashboardLayout';
 import { formatCurrency, formatDate } from '@/lib/utils';
-import { User, Key, Ban, Eye, Search, ChevronLeft, ChevronRight, Loader2, Shield, Calendar, Wallet } from 'lucide-react';
+import { User as UserIcon, Key, Ban, Eye, Search, ChevronLeft, ChevronRight, Loader2, Shield, Calendar, Wallet } from 'lucide-react';
 import { getUserRole } from '@/lib/auth';
 import { getUsers, updateUserStatus, resetUserPassword, type User } from '@/lib/userApi';
 import { useRouter } from 'next/navigation';
@@ -268,7 +268,7 @@ export default function UsersPage() {
                             className="text-blue-600 hover:text-blue-900"
                             title="View Profile"
                           >
-                            <User className="h-4 w-4 inline" />
+                            <UserIcon className="h-4 w-4 inline" />
                           </button>
                           <button
                             onClick={() => handlePasswordReset(user.id || user._id, getUserName(user))}
@@ -322,6 +322,7 @@ export default function UsersPage() {
                   <div>
                     <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
                       <button
+                        aria-label="Previous page"
                         onClick={() => setPage(Math.max(1, page - 1))}
                         disabled={page === 1}
                         className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 disabled:opacity-50"
@@ -354,6 +355,7 @@ export default function UsersPage() {
                         );
                       })}
                       <button
+                        aria-label="Next page"
                         onClick={() => setPage(Math.min(totalPages, page + 1))}
                         disabled={page === totalPages}
                         className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 disabled:opacity-50"

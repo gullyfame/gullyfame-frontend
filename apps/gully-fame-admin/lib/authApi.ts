@@ -84,7 +84,7 @@ export function isAuthenticated(): boolean {
   return !!getToken();
 }
 
-export function getAuthHeaders(extra?: HeadersInit): HeadersInit {
+export function getAuthHeaders(extra?: Record<string, string>): Record<string, string> {
   const token = getToken();
   const base: Record<string, string> = {};
 

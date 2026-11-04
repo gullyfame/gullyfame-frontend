@@ -127,7 +127,6 @@ export default function CreateCompetitionPage() {
       if (formData.bannerImage) {
         
         
-        console.log('Banner image selected:', formData.bannerImage.name);
       }
 
       const result = await createCompetition(competitionData);
@@ -163,6 +162,7 @@ export default function CreateCompetitionPage() {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
         <button
+          aria-label="Go back"
           onClick={() => router.back()}
               className="flex items-center justify-center w-9 h-9 rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors"
         >
@@ -389,6 +389,7 @@ export default function CreateCompetitionPage() {
                       className="w-full h-40 object-cover rounded-lg border border-gray-200"
                     />
                     <button
+                      aria-label="Remove banner image"
                       type="button"
                       onClick={() => setFormData({ ...formData, bannerImage: null, bannerPreview: '' })}
                       className="absolute top-2 right-2 p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors"

@@ -226,7 +226,7 @@ export default function CompetitionsPage() {
                     {formatCurrency(comp.prizeAmount || comp.prizePool || 0)}
                   </td>
                   <td className="px-4 py-3 whitespace-nowrap text-xs text-gray-900">
-                    {comp.participants?.length || comp.registered || 0}
+                    {(Array.isArray(comp.participants) ? comp.participants.length : comp.participants) || comp.registered || 0}
                   </td>
                   <td className="px-4 py-3 whitespace-nowrap text-[10px] text-gray-500">
                     {formatDate(comp.startDate)} - {formatDate(comp.endDate)}

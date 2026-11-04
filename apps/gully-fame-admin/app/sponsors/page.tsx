@@ -423,6 +423,7 @@ export default function SponsorsPage() {
               <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
                 <h2 className="text-xl font-bold text-gray-900">Create New Sponsor</h2>
                 <button
+                  aria-label="Close create sponsor dialog"
                   onClick={() => {
                     setShowCreateModal(false);
                     setFormData({ name: '', email: '', password: '', confirmPassword: '' });
@@ -550,6 +551,7 @@ export default function SponsorsPage() {
                   <h2 className="text-xl font-bold text-gray-900">Sponsor Created Successfully!</h2>
                 </div>
                 <button
+                  aria-label="Close success dialog"
                   onClick={() => {
                     setShowSuccessModal(false);
                     setCreatedCredentials({ sponsorId: '', email: '', password: '' });
@@ -662,6 +664,7 @@ export default function SponsorsPage() {
               <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
                 <h2 className="text-xl font-bold text-gray-900">Edit Sponsor</h2>
                 <button
+                  aria-label="Close edit sponsor dialog"
                   onClick={() => {
                     setShowEditModal(false);
                     setEditingSponsor(null);

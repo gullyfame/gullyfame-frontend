@@ -352,6 +352,7 @@ export default function ReportsPage() {
                   {selectedReport.status === 'PENDING' ? 'Update Report Status' : 'Report Details'}
                 </h2>
                 <button
+                  aria-label="Close status dialog"
                   onClick={() => {
                     setShowStatusModal(false);
                     setSelectedReport(null);

@@ -22,12 +22,10 @@ export default function SplashScreen() {
       try {
         const result = await getSplash();
 
-        console.log("[SplashScreen] Initial fetch result:", result);
 
         if (result.success && result.data) {
           const images = (result.data as any).splashScreens || (result.data as any).images || [];
 
-          console.log("[SplashScreen] Initial fetch - Images from API:", images);
 
           
           const baseImages: Array<{ id: number; url: string | null; file: File | null }> = [
@@ -54,7 +52,6 @@ export default function SplashScreen() {
                   const imageUrl =
                     typeof img === "string" ? img : img.imageUrl || img.url || img.image || null;
 
-                  console.log(`[SplashScreen] Processing image ${index + 1}:`, imageUrl);
 
                   if (imageUrl) {
                     baseImages[index] = {
@@ -68,7 +65,6 @@ export default function SplashScreen() {
             );
           }
 
-          console.log("[SplashScreen] Setting splash images:", baseImages);
           setSplashImages(baseImages);
         }
       } catch (error) {

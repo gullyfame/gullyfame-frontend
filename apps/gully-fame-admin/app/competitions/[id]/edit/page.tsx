@@ -14,6 +14,7 @@ export default function EditCompetitionPage() {
   const competitionId = String(params.id);
   const [competition, setCompetition] = useState<Competition | null>(null);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -36,6 +37,7 @@ export default function EditCompetitionPage() {
       if (cancelled) return;
       if (res.success && res.data) {
         const c = res.data;
+        setLoadError(null);
         setCompetition(c);
         setFormData({
           title: c.title || '',
@@ -51,6 +53,7 @@ export default function EditCompetitionPage() {
           sponsorLogo: c.sponsorLogo || '',
         });
       }
+      if (!res.success) setLoadError(res.message || res.error || 'Failed to load competition');
       setLoading(false);
     });
     return () => {
@@ -72,7 +75,7 @@ export default function EditCompetitionPage() {
     return (
       <DashboardLayout>
         <div className="text-center py-12">
-          <p className="text-gray-600">Competition not found</p>
+          <p className="text-gray-600">{loadError || 'Competition not found'}</p>
           <button
             onClick={() => router.push('/competitions')}
             className="mt-4 text-primary-600 hover:text-primary-700"

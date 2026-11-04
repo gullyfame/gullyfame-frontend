@@ -41,6 +41,7 @@ export default function Header() {
     <header className="sticky top-0 z-10 flex h-14 items-center justify-center border-b border-app-border bg-app-surface px-3 sm:px-4 md:px-5 shadow-sm relative">
       {}
       <button
+        aria-label="Open menu"
         onClick={() => setMobileMenuOpen(true)}
         className="md:hidden absolute left-3 sm:left-4 p-2 rounded-md text-gray-600 hover:bg-gray-100 transition-colors"
       >

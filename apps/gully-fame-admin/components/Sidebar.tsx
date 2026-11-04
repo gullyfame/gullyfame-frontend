@@ -70,6 +70,7 @@ export default function Sidebar({ userRole }: { userRole: UserRole }) {
           <h1 className="text-lg font-bold tracking-tight">Gully<span className="text-primary-500">Fame</span></h1>
         </div>
         <button
+          aria-label="Close menu"
           onClick={() => setMobileMenuOpen(false)}
           className="md:hidden text-gray-400 hover:text-white"
         >

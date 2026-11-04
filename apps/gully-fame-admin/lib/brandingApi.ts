@@ -14,19 +14,10 @@ export interface SplashResponse {
 export async function uploadLogo(file: File): Promise<ApiResponse<LogoResponse>> {
   const endpoint = `${BASE_URL}public/logo`;
 
-  console.log("[Branding API] POST Upload Logo - Endpoint:", endpoint);
-  console.log("[Branding API] POST Upload Logo - File name:", file.name);
-  console.log("[Branding API] POST Upload Logo - File size:", file.size, "bytes");
-  console.log("[Branding API] POST Upload Logo - File type:", file.type);
 
   const formData = new FormData();
   formData.append("logo", file);
   formData.append("splash", "");
-  console.log("[Branding API] POST Upload Logo - FormData keys:", Array.from(formData.keys()));
-  console.log(
-    "[Branding API] POST Upload Logo - FormData entries count:",
-    Array.from(formData.entries()).length
-  );
 
   const headers = getAuthHeaders();
   delete (headers as any)["Content-Type"];
@@ -39,17 +30,10 @@ export async function uploadLogo(file: File): Promise<ApiResponse<LogoResponse>>
     });
 
     const responseText = await httpResponse.text();
-    console.log("[Branding API] POST Upload Logo - Response received:", responseText);
-    console.log(
-      "[Branding API] POST Upload Logo - Status:",
-      httpResponse.status,
-      httpResponse.statusText
-    );
 
     let responseData: any;
     try {
       responseData = JSON.parse(responseText);
-      console.log("[Branding API] POST Upload Logo - Parsed JSON:", responseData);
     } catch (parseError) {
       console.error("[Branding API] POST Upload Logo - Parse error:", parseError);
 
@@ -85,7 +69,6 @@ export async function uploadLogo(file: File): Promise<ApiResponse<LogoResponse>>
       };
     }
 
-    console.log("[Branding API] POST Upload Logo - Success:", responseData);
 
     return {
       success: true,
@@ -107,25 +90,13 @@ export async function uploadLogo(file: File): Promise<ApiResponse<LogoResponse>>
 export async function uploadSplash(files: File[]): Promise<ApiResponse<SplashResponse>> {
   const endpoint = `${BASE_URL}public/splash`;
 
-  console.log("[Branding API] POST Upload Splash - Endpoint:", endpoint);
-  console.log("[Branding API] POST Upload Splash - Number of files:", files.length);
   files.forEach((file, index) => {
-    console.log(
-      `[Branding API] POST Upload Splash - File ${index + 1}:`,
-      file.name,
-      `(${file.size} bytes, ${file.type})`
-    );
   });
 
   const formData = new FormData();
   files.forEach((file) => {
     formData.append("splash", file);
   });
-  console.log("[Branding API] POST Upload Splash - FormData keys:", Array.from(formData.keys()));
-  console.log(
-    "[Branding API] POST Upload Splash - FormData entries count:",
-    Array.from(formData.entries()).length
-  );
 
   const headers = getAuthHeaders();
   delete (headers as any)["Content-Type"];
@@ -138,17 +109,10 @@ export async function uploadSplash(files: File[]): Promise<ApiResponse<SplashRes
     });
 
     const responseText = await httpResponse.text();
-    console.log("[Branding API] POST Upload Splash - Response received:", responseText);
-    console.log(
-      "[Branding API] POST Upload Splash - Status:",
-      httpResponse.status,
-      httpResponse.statusText
-    );
 
     let responseData: any;
     try {
       responseData = JSON.parse(responseText);
-      console.log("[Branding API] POST Upload Splash - Parsed JSON:", responseData);
     } catch (parseError) {
       console.error("[Branding API] POST Upload Splash - Parse error:", parseError);
 
@@ -184,7 +148,6 @@ export async function uploadSplash(files: File[]): Promise<ApiResponse<SplashRes
       };
     }
 
-    console.log("[Branding API] POST Upload Splash - Success:", responseData);
 
     return {
       success: true,
@@ -206,7 +169,6 @@ export async function uploadSplash(files: File[]): Promise<ApiResponse<SplashRes
 export async function getLogo(): Promise<ApiResponse<LogoResponse>> {
   const endpoint = `${BASE_URL}public/logo`;
 
-  console.log("[Branding API] GET Logo - Endpoint:", endpoint);
 
   try {
     const httpResponse = await fetch(endpoint, {
@@ -218,13 +180,10 @@ export async function getLogo(): Promise<ApiResponse<LogoResponse>> {
     });
 
     const responseText = await httpResponse.text();
-    console.log("[Branding API] GET Logo - Response received:", responseText);
-    console.log("[Branding API] GET Logo - Status:", httpResponse.status, httpResponse.statusText);
 
     let responseData: any;
     try {
       responseData = JSON.parse(responseText);
-      console.log("[Branding API] GET Logo - Parsed JSON:", responseData);
     } catch (parseError) {
       console.error("[Branding API] GET Logo - Parse error:", parseError);
 
@@ -263,7 +222,6 @@ export async function getLogo(): Promise<ApiResponse<LogoResponse>> {
     const logoUrl =
       typeof responseData.data === "string" ? responseData.data : responseData.data?.logoUrl || "";
 
-    console.log("[Branding API] GET Logo - Success, Logo URL:", logoUrl);
 
     return {
       success: true,
@@ -285,7 +243,6 @@ export async function getLogo(): Promise<ApiResponse<LogoResponse>> {
 export async function getSplash(): Promise<ApiResponse<SplashResponse>> {
   const endpoint = `${BASE_URL}public/splash`;
 
-  console.log("[Branding API] GET Splash - Endpoint:", endpoint);
 
   try {
     const httpResponse = await fetch(endpoint, {
@@ -297,17 +254,10 @@ export async function getSplash(): Promise<ApiResponse<SplashResponse>> {
     });
 
     const responseText = await httpResponse.text();
-    console.log("[Branding API] GET Splash - Response received:", responseText);
-    console.log(
-      "[Branding API] GET Splash - Status:",
-      httpResponse.status,
-      httpResponse.statusText
-    );
 
     let responseData: any;
     try {
       responseData = JSON.parse(responseText);
-      console.log("[Branding API] GET Splash - Parsed JSON:", responseData);
     } catch (parseError) {
       console.error("[Branding API] GET Splash - Parse error:", parseError);
 
@@ -347,7 +297,6 @@ export async function getSplash(): Promise<ApiResponse<SplashResponse>> {
 
     const images = Array.isArray(responseData.data) ? responseData.data : [];
 
-    console.log("[Branding API] GET Splash - Success, Images:", images);
 
     return {
       success: true,

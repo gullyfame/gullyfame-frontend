@@ -4,7 +4,6 @@ import type { ApiResponse } from './apiTypes';
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://backend.gullyfame.com/v1/api/';
 
 async function makeGetRequest(apiName: string, endpoint: string): Promise<ApiResponse<any>> {
-  console.log(`[CMS API] GET ${apiName} - Endpoint: ${endpoint}`);
 
   try {
     const httpResponse = await fetch(endpoint, {
@@ -16,7 +15,6 @@ async function makeGetRequest(apiName: string, endpoint: string): Promise<ApiRes
     });
 
     const responseText = await httpResponse.text();
-    console.log(`[CMS API] GET ${apiName} - Response received:`, responseText);
 
     let responseData: any;
     try {
@@ -50,7 +48,6 @@ async function makeGetRequest(apiName: string, endpoint: string): Promise<ApiRes
       };
     }
 
-    console.log(`[CMS API] GET ${apiName} - Success:`, responseData);
     return {
       success: true,
       message: responseData.message || `${apiName} fetched successfully`,
@@ -67,8 +64,6 @@ async function makeGetRequest(apiName: string, endpoint: string): Promise<ApiRes
 }
 
 async function makePostRequest(apiName: string, endpoint: string, requestBody: any): Promise<ApiResponse<any>> {
-  console.log(`[CMS API] POST ${apiName} - Endpoint: ${endpoint}`);
-  console.log(`[CMS API] POST ${apiName} - Body:`, requestBody);
 
   try {
     const httpResponse = await fetch(endpoint, {
@@ -81,7 +76,6 @@ async function makePostRequest(apiName: string, endpoint: string, requestBody: a
     });
 
     const responseText = await httpResponse.text();
-    console.log(`[CMS API] POST ${apiName} - Response received:`, responseText);
 
     let responseData: any;
     try {
@@ -115,7 +109,6 @@ async function makePostRequest(apiName: string, endpoint: string, requestBody: a
       };
     }
 
-    console.log(`[CMS API] POST ${apiName} - Success:`, responseData);
     return {
       success: true,
       message: responseData.message || `${apiName} updated successfully`,
